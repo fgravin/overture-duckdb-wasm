@@ -1,47 +1,33 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Header from '@/components/Header.vue'
+import Map from '@/components/Map.vue'
+import QueryForm from '@/components/QueryForm.vue'
+import Legend from '@/components/Legend.vue'
+import { useAppStore } from '@/store/app.store.ts'
+import { storeToRefs } from 'pinia'
+
+const store = useAppStore()
+const { legend } = storeToRefs(store)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="flex h-screen flex-col">
+    <header>
+      <Header />
+    </header>
+    <div class="flex grow flex-col md:flex-row">
+      <aside class="md:w-120">
+        <QueryForm></QueryForm>
+      </aside>
+      <main class="relative grow">
+        <div
+          v-if="legend?.length > 0"
+          class="absolute bottom-10 left-10 z-10 bg-white/60 p-6 backdrop-blur-sm"
+        >
+          <Legend></Legend>
+        </div>
+        <Map></Map>
+      </main>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
