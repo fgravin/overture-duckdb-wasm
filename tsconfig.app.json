@@ -4,7 +4,9 @@
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "useDefineForClassFields": false,
     "paths": {
       "@/*": ["./src/*"]
     }
